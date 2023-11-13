@@ -3,6 +3,7 @@ from selenium.common.exceptions import NoAlertPresentException
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from .locators import BasePageLocators
 import math
 
 class BasePage():
@@ -12,9 +13,11 @@ class BasePage():
         self.url = url
         self.timeout = timeout
 
-    def open(self):
-        self.browser.implicitly_wait(self.timeout)
-        self.browser.get(self.url)
+    def go_to_login_page(self):
+        self.browser.find_element(*BasePageLocators.LOGIN_LINK).click()
+
+    def is_login_link(self):
+        assert self.browser.find_element(*BasePageLocators.LOGIN_LINK), "NO login link has been found"
 
     def is_element_present(self, selector_type, selector):
         try:
@@ -36,6 +39,10 @@ class BasePage():
         except TimeoutError:
             return False
         return True
+    
+    def open(self):
+        self.browser.implicitly_wait(self.timeout)
+        self.browser.get(self.url)
 
     def solve_quiz_and_get_code(self):
         alert = self.browser.switch_to.alert
