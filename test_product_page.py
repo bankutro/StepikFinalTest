@@ -2,13 +2,13 @@ from .pages.product_page import ProductPage
 from .pages.basket_page import BasketPage
 from .pages.login_page import LoginPage
 import pytest
+import time
 
 @pytest.mark.user_add_to_basket
 class TestUserAddToBasketFromProductPage():
-
     @pytest.fixture
     def setup(self, browser):
-        email_for_registration = "stepik_test_mail_ri1@mail.ru"
+        email_for_registration = str(time.time()) + "@fakemail.org"
         password_for_registration = "drowssap123123"
 
         product_page = ProductPage(browser, "http://selenium1py.pythonanywhere.com/en-gb/catalogue/coders-at-work_207/")
@@ -18,7 +18,6 @@ class TestUserAddToBasketFromProductPage():
         login_page.register_new_user(email_for_registration, password_for_registration)
         login_page.is_authorized_user()
 
-    @pytest.mark.skip
     def test_user_cant_see_success_message(self, browser, setup):
         product_page = ProductPage(browser, "http://selenium1py.pythonanywhere.com/en-gb/catalogue/coders-at-work_207/")
         product_page.open()
