@@ -1,5 +1,14 @@
 from selenium.webdriver.common.by import By
 
+class MainPage():
+
+    def __init__(self, browser, url):
+        self.browser = browser
+        self.url = url
+
+    def open(self):
+        self.browser.get(self.url)
+
 def test_guest_can_go_to_login_page(browser):
     link = "http://selenium1py.pythonanywhere.com/"
     browser.get(link)
