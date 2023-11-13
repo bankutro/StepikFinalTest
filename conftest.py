@@ -17,14 +17,12 @@ def browser(request):
         options.add_experimental_option('prefs',{'intl.accept_languages': lang})
 
         browser = webdriver.Chrome(options=options)
-        browser.implicitly_wait(5)
     elif b_name == "firefox" and lang != None:
         print("Firefox starting...\n")
         f_profile = webdriver.FirefoxProfile()
         f_profile.set_preference('intl.accept_languages', lang)
 
         browser = webdriver.Firefox(firefox_profile=f_profile)
-        browser.implicitly_wait(5)
     else:
         raise pytest.UsageError("--browser should be chrome or firefox")
     
