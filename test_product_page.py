@@ -8,7 +8,6 @@ class TestUserAddToBasketFromProductPage():
 
     @pytest.fixture
     def setup(self, browser):
-
         email_for_registration = "stepik_test_mail_ri1@mail.ru"
         password_for_registration = "drowssap123123"
 
