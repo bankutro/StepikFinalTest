@@ -16,8 +16,17 @@ class BasePage():
     def go_to_login_page(self):
         self.browser.find_element(*BasePageLocators.LOGIN_LINK).click()
 
+    def go_to_basket_page(self):
+        self.browser.find_element(*BasePageLocators.BASKET_LINK).click()
+
+    def is_authorized_user(self):
+        assert self.is_element_present(*BasePageLocators.USER_ICON), "User icon is not presented, probably unauthorised user"
+
     def is_login_link(self):
         assert self.browser.find_element(*BasePageLocators.LOGIN_LINK), "NO login link has been found"
+
+    def is_view_basket_link(self):
+        assert self.browser.find_element(*BasePageLocators.BASKET_LINK), "NO basket link has been found"
 
     def is_element_present(self, selector_type, selector):
         try:
@@ -43,17 +52,3 @@ class BasePage():
     def open(self):
         self.browser.implicitly_wait(self.timeout)
         self.browser.get(self.url)
-
-    def solve_quiz_and_get_code(self):
-        alert = self.browser.switch_to.alert
-        x = alert.text.split(" ")[2]
-        answer = str(math.log(abs((12 * math.sin(float(x))))))
-        alert.send_keys(answer)
-        alert.accept()
-        try:
-            alert = self.browser.switch_to.alert
-            alert_text = alert.text
-            print(f"Your code: {alert_text}")
-            alert.accept()
-        except NoAlertPresentException:
-            print("No second alert presented")

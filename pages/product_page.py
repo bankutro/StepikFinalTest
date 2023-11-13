@@ -19,7 +19,7 @@ class ProductPage(BasePage):
         assert self.is_disappeared(*ProductPageLocators.PRODUCT_ADDED_NOTIFICATION), "Notification did NOT disappeared."
 
     def correct_added_product_name(self):
-        notifications_about_added_product = self.browser.find_elements(*ProductPageLocators.Product_ADDED_NOTIFICATION)
+        notifications_about_added_product = self.browser.find_elements(*ProductPageLocators.PRODUCT_ADDED_NOTIFICATION)
         alert_product_name = notifications_about_added_product[0]
         assert ProductPageLocators.PRODUCT_ADDED_NOTIFICATION_TEXT == alert_product_name.text, "Wrong text in notification"
 
